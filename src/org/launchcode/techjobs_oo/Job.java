@@ -30,6 +30,40 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+    @Override
+    public String toString() {
+        int nullData = 0;
+        String res = "\n";
+        res += "ID: " + getId() + "\n";
+        if (getName() == null || getName().equals("")) {
+            res += "Name: Data not available\n";
+            nullData++;
+        }
+        else res += "Name: " + getName() + "\n";
+        if (getEmployer() == null || getEmployer().getValue().equals("")) {
+            res += "Employer: Data not available\n";
+            nullData++;
+        }
+        else res += "Employer: " + getEmployer().toString() + "\n";
+        if (getLocation() == null || getLocation().getValue().equals("")) {
+            res += "Location: Data not available\n";
+            nullData++;
+        }
+        else res += "Location: " + getLocation().toString() + "\n";
+        if (getPositionType() == null || getPositionType().getValue().equals("")) {
+            res += "Position Type: Data not available\n";
+            nullData++;
+        }
+        else res += "Position Type: " + getPositionType().toString() + "\n";
+        if (getCoreCompetency() == null || getCoreCompetency().getValue().equals("")) {
+            res += "Core Competency: Data not available\n";
+            nullData++;
+        }
+        else res += "Core Competency: " + getCoreCompetency().toString() + "\n";
+        if (nullData == 5) return "OOPS! This job does not seem to exist.";
+        return res;
+    }
+
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 

@@ -8,6 +8,12 @@ class JobTest {
 
     static Job testJob1;
     static Job testJob2;
+    static Job job = new Job("Product tester", new Employer("ACME"),
+            new Location("Desert"), new PositionType("Quality control"),
+            new CoreCompetency("Persistence"));
+    static Job notFullData = new Job("Product tester", new Employer("ACME"),
+            new Location("Desert"), new PositionType("Quality control"),
+            new CoreCompetency(""));
 
     @BeforeAll
     public static void createJob() {
@@ -22,9 +28,6 @@ class JobTest {
 
     @Test
     public void testJobConstructorSetsAllFields() {
-        Job job = new Job("Product tester", new Employer("ACME"),
-                new Location("Desert"), new PositionType("Quality control"),
-                new CoreCompetency("Persistence"));
         assertEquals(3, job.getId());
         assertEquals("Product tester", job.getName());
         assertEquals("ACME", job.getEmployer().getValue());
@@ -36,5 +39,33 @@ class JobTest {
     @Test
     public void testJobsForEquality() {
         assertFalse(testJob1.equals(testJob2));
+    }
+
+    @Test
+    public void testStartEndToString() {
+        assertTrue(job.toString().startsWith("\n"));
+        assertTrue(job.toString().endsWith("\n"));
+    }
+
+    @Test
+    public void testDataToString() {
+        String res = "\n";
+        res += "ID: " + job.getId() + "\n";
+        res += "Name: " + job.getName() + "\n";
+        res += "Employer: " + job.getEmployer().toString() + "\n";
+        res += "Location: " + job.getLocation().toString() + "\n";
+        res += "Position Type: " + job.getPositionType().toString() + "\n";
+        res += "Core Competency: " + job.getCoreCompetency().toString() + "\n";
+        assertEquals(res, job.toString());
+    }
+
+    @Test
+    public void testNoDataToString() {
+        assertEquals("OOPS! This job does not seem to exist.", testJob1.toString());
+    }
+
+    @Test
+    public void testNotFullDataToString() {
+
     }
 }
